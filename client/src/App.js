@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "./components/AppNavbar";
 import AppNavbar from "./components/AppNavbar";
+import ShoppingList from "./components/ShoppingList";
 
 class App extends Component {
   state = {};
@@ -10,6 +11,7 @@ class App extends Component {
     return (
       <div className="App">
         <AppNavbar />
+        <ShoppingList />
       </div>
     );
   }
