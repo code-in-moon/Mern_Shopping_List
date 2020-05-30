@@ -52,7 +52,7 @@ router.post("/", (req, res) => {
     if (err) {
       res.status(400).json({ success: false });
     } else {
-      res.status(200).json({ success: true });
+      res.status(200).json({ succes: { success: true }, items: item });
     }
   });
 });

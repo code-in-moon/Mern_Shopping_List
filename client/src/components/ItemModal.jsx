@@ -12,7 +12,7 @@ import {
 import { connect } from "react-redux";
 import { addItem } from "../actions/itemActions";
 import PropTypes from "prop-types";
-import { v4 as uuid } from "uuid";
+// import { v4 as uuid } from "uuid";
 
 class ItemModal extends Component {
   state = {
@@ -31,7 +31,7 @@ class ItemModal extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     const newItem = {
-      id: uuid(),
+      //id: uuid(),  // with mongo db we dont need id
       name: this.state.name,
     };
 
@@ -75,6 +75,13 @@ class ItemModal extends Component {
     );
   }
 }
+
+//with connect
+ItemModal.proptype = {
+  addItem: PropTypes.func.isRequired,
+  item_reducer: PropTypes.object.isRequired,
+};
+
 const mapStateToProps = (state) => ({
   item_reducer: state.item_reducer,
 });

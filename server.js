@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const items = require("./routes/api/items");
 const app = express();
-const router = require("./routes/api/items");
+// const router = require("./routes/api/items");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

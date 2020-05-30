@@ -3,18 +3,15 @@ import * as types from "../actions/types";
 // import { GET_ITEMS, ADD_ITEM, DELETE_ITEM } from "../actions/types";
 
 const initialState = {
-  items: [
-    { id: uuid(), name: "Egg" },
-    { id: uuid(), name: "Milk" },
-    { id: uuid(), name: "bread" },
-    { id: uuid(), name: "canndy" },
-  ],
+  items: [],
+  loading: false,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case types.GET_ITEMS:
-      return { ...state };
+      return { ...state, items: action.payload.items, loading: false };
+    //you can add spiner above too
 
     case types.GET_ITEM:
       return state.filter((i) => i.id === action.payload.id);
@@ -35,6 +32,8 @@ export default function (state = initialState, action) {
           i.id !== action.payload.id ? i : { ...i, name: action.payload.item }
         ),
       };
+    case types.ITEMS_LOADING:
+      return { ...state, loading: true };
     default:
       return state;
   }
