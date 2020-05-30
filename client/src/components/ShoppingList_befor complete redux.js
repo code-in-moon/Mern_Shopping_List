@@ -35,11 +35,8 @@ class ShoppingList extends Component {
 
   //handle delete an item
   handeDelete = (item_mem) => {
-    // const new_items = this.state.items.filter((item) => item.id != item_mem.id);
-    // this.setState({ items: new_items });
-
-    //with redux
-    this.props.deleteItem(item_mem.id);
+    const new_items = this.state.items.filter((item) => item.id != item_mem.id);
+    this.setState({ items: new_items });
   };
 
   render() {
@@ -48,15 +45,14 @@ class ShoppingList extends Component {
     const { items } = this.props.item_reducer;
     return (
       <Container color="dark" style={{ marginBottom: "2rem" }}>
-        {/* create this in new component */}
-        {/* <Button
+        <Button
           onClick={() => this.handleAddItem()}
           dark
           style={{ marginBottom: "2rem" }}
           color="dark"
         >
           Add Item
-        </Button> */}
+        </Button>
         <ListGroupItem>
           <TransitionGroup className="shopping-list">
             {items.map((item_mem) => (
@@ -67,9 +63,6 @@ class ShoppingList extends Component {
                     color="danger"
                     size="sm"
                     onClick={() => this.handeDelete(item_mem)}
-
-                    //another way of passing argument
-                    // onClick={this.handeDelete.bind(this ,item_mem)}
                   >
                     &times;
                   </Button>
