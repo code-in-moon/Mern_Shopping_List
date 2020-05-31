@@ -23,23 +23,23 @@ class ShoppingList extends Component {
   }
 
   //handle add a item
-  handleAddItem = () => {
-    //clone the counter in state
-    const Name = prompt("Add a name");
-    if (Name) {
-      const Items = [...this.state.items];
-      Items.push({ id: uuid(), name: Name });
-      this.setState({ items: Items });
-    }
-  };
+  // handleAddItem = () => {
+  //   //clone the counter in state
+  //   const Name = prompt("Add a name");
+  //   if (Name) {
+  //     const Items = [...this.state.items];
+  //     Items.push({ id: uuid(), name: Name });
+  //     this.setState({ items: Items });
+  //   }
+  // };
 
   //handle delete an item
-  handeDelete = (item_mem) => {
+  handeDelete = (_id) => {
     // const new_items = this.state.items.filter((item) => item.id != item_mem.id);
     // this.setState({ items: new_items });
 
     //with redux
-    this.props.deleteItem(item_mem.id);
+    this.props.deleteItem(_id);
   };
 
   render() {
@@ -60,13 +60,13 @@ class ShoppingList extends Component {
         <ListGroupItem>
           <TransitionGroup className="shopping-list">
             {items.map((item_mem) => (
-              <CSSTransition key={item_mem.id} timeout="500" classNames="fade">
+              <CSSTransition key={item_mem._id} timeout="500" classNames="fade">
                 <ListGroupItem>
                   <Button
                     className="remove-btn"
                     color="danger"
                     size="sm"
-                    onClick={() => this.handeDelete(item_mem)}
+                    onClick={() => this.handeDelete(item_mem._id)}
 
                     //another way of passing argument
                     // onClick={this.handeDelete.bind(this ,item_mem)}
@@ -88,6 +88,7 @@ class ShoppingList extends Component {
 //with connect
 ShoppingList.proptype = {
   getItems: PropTypes.func.isRequired,
+  deleteItem: PropTypes.func.isRequired,
   item_reducer: PropTypes.object.isRequired,
 };
 

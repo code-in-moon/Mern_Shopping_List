@@ -9,6 +9,8 @@ import axios from "axios";
 // };
 
 // after connect to backend
+// thunk here allow us to make more than one asynchoronous request
+// we have this in pakage .jason  "proxy": "http://localhost:5000" we dont need to write this in request
 export const getItems = () => (dispatch) => {
   dispatch(setItemLoading());
   axios.get("/api/items").then((res) =>
@@ -47,13 +49,22 @@ export const addItem = (item) => (dispatch) => {
   );
 };
 
-export const deleteItem = (id) => {
-  return {
-    type: types.DELETE_ITEM,
-    payload: {
-      id: id,
-    },
-  };
+// export const deleteItem = (id) =>{
+//   return {
+//     type: types.DELETE_ITEM,
+//     payload: {
+//       id: id,
+//     },
+//   };
+// };
+
+export const deleteItem = (id) => (dispatch) => {
+  axios.delete("/api/items/" + id).then((res) =>
+    dispatch({
+      type: types.DELETE_ITEM,
+      payload: { id: id, success: res.data.success },
+    })
+  );
 };
 
 export const getItem = (id) => {

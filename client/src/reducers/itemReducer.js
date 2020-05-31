@@ -22,7 +22,8 @@ export default function (state = initialState, action) {
     case types.DELETE_ITEM:
       return {
         ...state,
-        items: state.items.filter((i) => i.id !== action.payload.id),
+        //mongo has  _id
+        items: state.items.filter((i) => i._id !== action.payload.id),
       };
 
     case types.UPDATE_ITEM:
