@@ -1,0 +1,6 @@
+{
+  "mongoURI_test": "mongodb+srv://azura:qw29oi@codeincluster-lkwhk.mongodb.net/test?retryWrites=true&w=majority",
+  "mongoURI_shopList": "mongodb+srv://azura:qw29oi@codeincluster-lkwhk.mongodb.net/shoppingListApp?retryWrites=true&w=majority",
+  "mongo_local_host": "mongodb://localhost/mern-shoping-list",
+  "jwtSEcret": "sl_myJwlSecret"
+}

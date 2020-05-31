@@ -1,25 +1,31 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const items = require("./routes/api/items");
 const app = express();
 const path = require("path");
-// const router = require("./routes/api/items");
+const config = require("config");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // here we connect to mongodb database and it need the url as a argument
-mongoose.connect(require("./config/keys").mongoURI, (err) => {
-  if (err) {
-    throw err;
-    console.log(err);
-  } else {
-    console.log("mongodb is connected");
+// const database = require("./config/keys").mongoURI_shopList;
+const database = config.get("mongoURI_shopList");
+mongoose.connect(
+  database,
+  { useNewUrlParser: true, useCreateIndex: true },
+  (err) => {
+    if (err) {
+      throw err;
+      console.log(err);
+    } else {
+      console.log("mongodb is connected");
+    }
   }
-});
-var db = mongoose.connection;
+);
+// var db = mongoose.connection;
 
-app.use("/api/items", items);
+app.use("/api/items", require("./routes/api/items"));
+app.use("/api/users", require("./routes/api/users"));
 
 //set up for deploy a full stack app
 //serve static assets if in production
