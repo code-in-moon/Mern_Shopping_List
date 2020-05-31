@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Container, ListGroup, ListGroupItem, Button } from "reactstrap";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import { v4 as uuid } from "uuid";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { connect } from "react-redux";
 import { getItems, deleteItem } from "../actions/itemActions";
@@ -61,20 +60,22 @@ class ShoppingList extends Component {
           <TransitionGroup className="shopping-list">
             {items.map((item_mem) => (
               <CSSTransition key={item_mem._id} timeout="500" classNames="fade">
-                <ListGroupItem>
-                  <Button
-                    className="remove-btn"
-                    color="danger"
-                    size="sm"
-                    onClick={() => this.handeDelete(item_mem._id)}
+                <ListGroup>
+                  <ListGroupItem>
+                    <Button
+                      className="remove-btn"
+                      color="danger"
+                      size="sm"
+                      onClick={() => this.handeDelete(item_mem._id)}
 
-                    //another way of passing argument
-                    // onClick={this.handeDelete.bind(this ,item_mem)}
-                  >
-                    &times;
-                  </Button>
-                  {item_mem.name}
-                </ListGroupItem>
+                      //another way of passing argument
+                      // onClick={this.handeDelete.bind(this ,item_mem)}
+                    >
+                      &times;
+                    </Button>
+                    {item_mem.name}
+                  </ListGroupItem>
+                </ListGroup>
               </CSSTransition>
             ))}
           </TransitionGroup>
