@@ -9,7 +9,8 @@ app.use(express.urlencoded({ extended: false }));
 
 // here we connect to mongodb database and it need the url as a argument
 // const database = require("./config/keys").mongoURI_shopList;
-const database = config.get("mongoURI_shopList");
+// const database = config.get("mongoURI_shopList");
+const database = config.get("mongo_local_host");
 mongoose.connect(
   database,
   { useNewUrlParser: true, useCreateIndex: true },
@@ -26,6 +27,7 @@ mongoose.connect(
 
 app.use("/api/items", require("./routes/api/items"));
 app.use("/api/users", require("./routes/api/users"));
+app.use("/api/auth", require("./routes/api/auth"));
 
 //set up for deploy a full stack app
 //serve static assets if in production
