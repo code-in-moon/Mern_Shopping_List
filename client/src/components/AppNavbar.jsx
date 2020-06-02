@@ -10,6 +10,7 @@ import {
   Container,
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import RegisterModal from "./auth/RegisterModal";
 
 class AppNavbar extends Component {
   state = {
@@ -35,6 +36,9 @@ class AppNavbar extends Component {
                 </NavItem>
                 <NavItem>
                   <NavLink href="https://google.com">Search in google</NavLink>
+                </NavItem>
+                <NavItem>
+                  <RegisterModal />
                 </NavItem>
               </Nav>
             </Collapse>
