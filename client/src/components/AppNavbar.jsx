@@ -10,8 +10,8 @@ import {
   Container,
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import RegisterModal from "./auth/RegisterModal";
-import Logout from "./auth/Logout";
+import RegisterModal from "./auth_component/RegisterModal";
+import Logout from "./auth_component/Logout";
 
 class AppNavbar extends Component {
   state = {
