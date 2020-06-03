@@ -29,11 +29,11 @@ export const loadUser = () => (dispatch, getState) => {
 
 //*************************************************************************************** */
 //register user
-export const register = (name, email, password) => (dispatch) => {
+export const register = ({ name, email, password }) => (dispatch) => {
   //create the headers of oue request to server
   const config = {
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
     },
   };
 
@@ -45,17 +45,26 @@ export const register = (name, email, password) => (dispatch) => {
   axios
     .post("/api/users", body, config)
     .then((res) =>
-      dispatchEvent({
+      dispatch({
         type: types.REGISTER_SUCCESS,
         payload: res.data,
       })
     )
     .catch((err) => {
+      console.log(err);
       dispatch(
         returnErrors(err.response.data, err.response.status, "REGISTER_FAIL")
       );
       dispatch({ type: types.REGISTER_FAIL });
     });
+};
+
+//************************************************************************** */
+//log out
+export const logout = () => {
+  return {
+    type: types.LOGOT_SUCCESS,
+  };
 };
 
 //************************************************************************************* */

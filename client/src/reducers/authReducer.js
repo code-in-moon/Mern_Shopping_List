@@ -2,7 +2,7 @@ import * as types from "../actions/types";
 
 const initialState = {
   token: localStorage.getItem("token"),
-  isAthenticated: null,
+  isAuthenticated: null,
   isLoading: false,
   user: null,
 };
@@ -15,7 +15,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isLoading: false,
-        isAthenticated: true,
+        isAuthenticated: true,
         usser: action.payload,
       };
     case types.LOGIN_SUCCESS:
@@ -25,7 +25,7 @@ export default function (state = initialState, action) {
         ...state,
         ...action.payload,
         isLoading: false,
-        isAthenticated: true,
+        isAuthenticated: true,
       };
 
     case types.AUTH_ERROR:
@@ -37,7 +37,7 @@ export default function (state = initialState, action) {
         ...state,
         token: null,
         user: null,
-        isAthenticated: false,
+        isAuthenticated: false,
         isLoading: false,
       };
     default:

@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 const database = config.get("mongo_local_host");
 mongoose.connect(
   database,
-  { useNewUrlParser: true, useCreateIndex: true },
+  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
   (err) => {
     if (err) {
       throw err;

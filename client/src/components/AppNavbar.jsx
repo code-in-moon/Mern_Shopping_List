@@ -11,6 +11,7 @@ import {
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import RegisterModal from "./auth/RegisterModal";
+import Logout from "./auth/Logout";
 
 class AppNavbar extends Component {
   state = {
@@ -35,10 +36,13 @@ class AppNavbar extends Component {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="https://google.com">Search in google</NavLink>
+                  <NavLink href="https://google.com">Google</NavLink>
                 </NavItem>
                 <NavItem>
                   <RegisterModal />
+                </NavItem>
+                <NavItem>
+                  <Logout />
                 </NavItem>
               </Nav>
             </Collapse>

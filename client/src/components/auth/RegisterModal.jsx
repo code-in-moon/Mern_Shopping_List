@@ -14,6 +14,7 @@ import {
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { register } from "../../actions/authActions";
+import { clearErrors } from "../../actions/errorActions";
 
 class RegisterModal extends Component {
   state = {
@@ -29,22 +30,32 @@ class RegisterModal extends Component {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
     register: PropTypes.func.isRequired,
+    clearErrors: PropTypes.func.isRequired,
   };
 
   toggle = () => {
+    //clear errors
+    this.props.clearErrors();
     this.setState({
       modal: !this.state.modal,
     });
   };
 
   componentDidUpdate(prevprops, nextprops) {
-    const { error } = this.props;
+    const { error, isAuthenticated } = this.props;
     if (error !== prevprops.error) {
       //check for register error wich we give it ad id = REGISTER_FAIL in authactions>>register()
       if (error.id === "REGISTER_FAIL") {
         this.setState({ msg: error.msg.msg });
       } else {
         this.setState({ msg: null });
+      }
+    }
+
+    // if authenticated close modal
+    if (this.state.modal) {
+      if (isAuthenticated) {
+        this.toggle();
       }
     }
   }
@@ -54,6 +65,7 @@ class RegisterModal extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
+
     //get the info from state
     const { name, email, password } = this.state;
 
@@ -77,34 +89,39 @@ class RegisterModal extends Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Register </ModalHeader>
           <ModalBody>
+            {this.state.msg ? (
+              <Alert color="danger">{this.state.msg}</Alert>
+            ) : null}
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for="name">name</Label>
+                <Label for="name">Name</Label>
                 <Input
                   type="text"
                   name="name"
                   id="name"
-                  placeholder="Enter Your Name"
+                  placeholder="Name"
                   onChange={this.onChange}
                   className="mb-3"
                 />
 
-                <Label for="email">email</Label>
+                <Label for="email">ٍٍٍEmail</Label>
                 <Input
+                  // type="email"
                   type="email"
                   name="email"
                   id="email"
-                  placeholder="Enter Your Email"
+                  placeholder="Email"
                   onChange={this.onChange}
                   className="mb-3"
                 />
 
-                <Label for="password">password</Label>
+                <Label for="password">Password</Label>
                 <Input
+                  // type="password"
                   type="password"
                   name="password"
                   id="password"
-                  placeholder="Enter Ypur Password"
+                  placeholder="Password"
                   onChange={this.onChange}
                   className="mb-3"
                 />
@@ -127,4 +144,6 @@ const mapStateToProps = (state) => ({
 });
 
 //as the second argu of connect we pass the actions of reducer wich we want use in this component and we should define it in propTypes in order to use it by this,prop.*
-export default connect(mapStateToProps, { register })(RegisterModal);
+export default connect(mapStateToProps, { register, clearErrors })(
+  RegisterModal
+);
