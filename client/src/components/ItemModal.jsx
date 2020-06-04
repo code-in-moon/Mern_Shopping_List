@@ -15,6 +15,11 @@ import PropTypes from "prop-types";
 // import { v4 as uuid } from "uuid";
 
 class ItemModal extends Component {
+  static propTypes = {
+    addItem: PropTypes.func.isRequired,
+    item_reducer: PropTypes.object.isRequired,
+    isAuthenticated: PropTypes.bool,
+  };
   state = {
     modal: false,
     name: "",
@@ -44,13 +49,20 @@ class ItemModal extends Component {
   render() {
     return (
       <div>
-        <Button
-          color="dark"
-          style={{ marginBottom: "3rem" }}
-          onClick={this.toggle}
-        >
-          Add Item
-        </Button>
+        {this.props.isAuthenticated ? (
+          <Button
+            color="dark"
+            style={{ marginBottom: "3rem" }}
+            onClick={this.toggle}
+          >
+            Add Item
+          </Button>
+        ) : (
+          <h4 className="mb-3 ml-4">
+            Please Register or Login to manage Items
+          </h4>
+        )}
+
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Add to Shopping List </ModalHeader>
           <ModalBody>
@@ -76,13 +88,15 @@ class ItemModal extends Component {
   }
 }
 
-//with connect
-ItemModal.proptype = {
-  addItem: PropTypes.func.isRequired,
-  item_reducer: PropTypes.object.isRequired,
-};
+//with connect you can write this inside componenet class
+// ItemModal.proptype = {
+//   addItem: PropTypes.func.isRequired,
+//   item_reducer: PropTypes.object.isRequired,
+//   isAuthenticated: PropTypes.bool,
+// };
 
 const mapStateToProps = (state) => ({
   item_reducer: state.item_reducer,
+  isAuthenticated: state.auth.isAuthenticated,
 });
 export default connect(mapStateToProps, { addItem })(ItemModal);

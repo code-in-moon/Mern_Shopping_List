@@ -58,6 +58,37 @@ export const register = ({ name, email, password }) => (dispatch) => {
       dispatch({ type: types.REGISTER_FAIL });
     });
 };
+//*************************************************************************************** */
+//Login user
+export const login = ({ email, password }) => (dispatch) => {
+  //create the headers of oue request to server
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  //create req.body of our request to server
+  // stringfy : convert javascript object to a jason
+  const body = JSON.stringify({ email, password });
+
+  //make a request to server
+  axios
+    .post("/api/auth", body, config)
+    .then((res) =>
+      dispatch({
+        type: types.LOGIN_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) => {
+      console.log(err);
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "LOGIN_FAIL")
+      );
+      dispatch({ type: types.LOGIN_FAIL });
+    });
+};
 
 //************************************************************************** */
 //log out

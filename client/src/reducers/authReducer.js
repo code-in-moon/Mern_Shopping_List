@@ -16,7 +16,7 @@ export default function (state = initialState, action) {
         ...state,
         isLoading: false,
         isAuthenticated: true,
-        usser: action.payload,
+        user: action.payload,
       };
     case types.LOGIN_SUCCESS:
     case types.REGISTER_SUCCESS:
