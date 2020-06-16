@@ -33,6 +33,9 @@ export const getItems = () => (dispatch) => {
     )
     .catch((err) => {
       dispatch(returnErrors(err.response.data, err.response.status));
+      // if (err.response.data && err.response.status) {
+      //   dispatch(returnErrors(err.response.data, err.response.status));
+      // }
     });
 };
 
@@ -58,6 +61,9 @@ export const addItem = (item) => (dispatch, getState) => {
     )
     .catch((err) => {
       dispatch(returnErrors(err.response.data, err.response.status));
+      // if (err.response.data && err.response.status) {
+      //   dispatch(returnErrors(err.response.data, err.response.status));
+      // }
     });
 };
 

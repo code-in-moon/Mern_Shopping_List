@@ -11,14 +11,12 @@ router.get("/", (req, res) => {
   //we find all document in "item" collection
   Item.find((err, items) => {
     if (err) {
-      // throw err;   // throw error couse crash in request and server dont use it here
       res.status(400).json({ success: false });
     } else {
       res.status(200).json({
         succes: { success: true },
         items: items,
       });
-      //res.status(200).json({success: true})
     }
   }).sort({ date: -1 });
 });
@@ -49,7 +47,6 @@ router.delete("/:_id", auth, (req, res) => {
     if (err) {
       res.status(400).json({ success: false });
     } else {
-      //res.json(item);
       res.status(200).json({ success: true });
     }
   });

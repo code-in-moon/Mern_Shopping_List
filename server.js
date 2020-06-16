@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: false }));
 // here we connect to mongodb database and it need the url as a argument
 // const database = require("./config/keys").mongoURI_shopList;
 // const database = config.get("mongoURI_shopList");
-const database = config.get("mongoURI_shopList");
+const database = config.get("mongo_local_host");
 mongoose.connect(
   database,
   { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
@@ -50,3 +50,5 @@ app.listen(PORT, (err) => {
     console.log(`server is started at ${PORT}`);
   }
 });
+
+

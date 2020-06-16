@@ -16,55 +16,23 @@ class ShoppingList extends Component {
     isAuthenticated: PropTypes.bool,
   };
 
-  // state = {
-  //   items: [
-  //     { id: uuid(), name: "Egg" },
-  //     { id: uuid(), name: "Milk" },
-  //     { id: uuid(), name: "State" },
-  //     { id: uuid(), name: "Orange" },
-  //   ],
-  // };
+
 
   //call getItems
   componentDidMount() {
     this.props.getItems();
-  }
-
-  //handle add a item
-  // handleAddItem = () => {
-  //   //clone the counter in state
-  //   const Name = prompt("Add a name");
-  //   if (Name) {
-  //     const Items = [...this.state.items];
-  //     Items.push({ id: uuid(), name: Name });
-  //     this.setState({ items: Items });
-  //   }
-  // };
+  };
 
   //handle delete an item
   handeDelete = (_id) => {
-    // const new_items = this.state.items.filter((item) => item.id != item_mem.id);
-    // this.setState({ items: new_items });
-
-    //with redux
     this.props.deleteItem(_id);
   };
 
   render() {
-    // const { items } = this.state;
-    //after using redux  this.props.item_reducer  is reperesent the whole state and items are in   this.props.item_reducer.items (in itemReducer)
+
     const { items } = this.props.item_reducer;
     return (
       <Container color="dark" style={{ marginBottom: "2rem" }}>
-        {/* create this in new component */}
-        {/* <Button
-          onClick={() => this.handleAddItem()}
-          dark
-          style={{ marginBottom: "2rem" }}
-          color="dark"
-        >
-          Add Item
-        </Button> */}
         <ListGroupItem>
           <TransitionGroup className="shopping-list">
             {items.map((item_mem) => (
@@ -79,12 +47,9 @@ class ShoppingList extends Component {
                         className="remove-btn"
                         color="danger"
                         size="sm"
-                        onClick={() => this.handeDelete(item_mem._id)}
-                      >
+                        onClick={() => this.handeDelete(item_mem._id)} >
                         &times;
-                      </Button>
-                    ) : null}
-
+                      </Button>) : null}
                     {item_mem.name}
                   </ListGroupItem>
                 </ListGroup>

@@ -58,10 +58,10 @@ class ItemModal extends Component {
             Add Item
           </Button>
         ) : (
-          <h4 className="mb-3 ml-4">
-            Please Register or Login to manage Items
-          </h4>
-        )}
+            <h4 className="mb-3 ml-4">
+              Please Register or Login to manage Items
+            </h4>
+          )}
 
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Add to Shopping List </ModalHeader>
@@ -88,12 +88,6 @@ class ItemModal extends Component {
   }
 }
 
-//with connect you can write this inside componenet class
-// ItemModal.proptype = {
-//   addItem: PropTypes.func.isRequired,
-//   item_reducer: PropTypes.object.isRequired,
-//   isAuthenticated: PropTypes.bool,
-// };
 
 const mapStateToProps = (state) => ({
   item_reducer: state.item_reducer,
